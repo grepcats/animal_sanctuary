@@ -25,7 +25,7 @@ namespace AnimalSanctuaryTests.ControllerTests
         }
 
         [TestMethod]
-        public void AnimalController_IndexModelContainsCorrectData_List()
+        public void Mock_IndexContainsModelData_List()
         {
             //arrange
             DbSetup();
@@ -36,6 +36,20 @@ namespace AnimalSanctuaryTests.ControllerTests
 
             //assert
             Assert.IsInstanceOfType(result, typeof(List<Animal>));
+        }
+
+        [TestMethod]
+        public void Mock_GetViewResultIndex_ActionResult()
+        {
+            //arrange
+            DbSetup();
+            AnimalController controller = new AnimalController(mock.Object);
+
+            //act
+            var result = controller.Index();
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
     }
 }
