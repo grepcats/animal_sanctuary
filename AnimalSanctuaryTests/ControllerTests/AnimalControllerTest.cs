@@ -51,5 +51,23 @@ namespace AnimalSanctuaryTests.ControllerTests
             //assert
             Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
+
+        [TestMethod]
+        public void Mock_IndexModelContainsAnimals_Collection()
+        {
+            //arrange
+            DbSetup();
+            AnimalController controller = new AnimalController(mock.Object);
+            Animal testAnimal = new Animal();
+            testAnimal.Species = "Feline";
+            testAnimal.AnimalId = 1;
+
+            //act
+            ViewResult indexView = controller.Index() as ViewResult;
+            List<Animal> collection = indexView.ViewData.Model as List<Animal>;
+
+            //assert
+            CollectionAssert.Contains(collection, testAnimal);
+        }
     }
 }
