@@ -19,6 +19,16 @@ namespace AnimalSanctuary.Models
         public int VetId { get; set; }
         public virtual Vet Vet { get; set; }
 
+        public Animal() { }
+
+        public Animal(string species, string sex, string habitat, bool medical)
+        {
+            Species = species;
+            Sex = sex;
+            HabitatType = habitat;
+            MedicalEmergency = medical;
+        }
+
         public override bool Equals(object otherAnimal)
         {
             if (!(otherAnimal is Animal))
