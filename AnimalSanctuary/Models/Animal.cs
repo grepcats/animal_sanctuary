@@ -19,5 +19,22 @@ namespace AnimalSanctuary.Models
         public int VetId { get; set; }
         public virtual Vet Vet { get; set; }
 
+        public override bool Equals(object otherAnimal)
+        {
+            if (!(otherAnimal is Animal))
+            {
+                return false;
+            }
+            else
+            {
+                Animal newAnimal = (Animal)otherAnimal;
+                return this.AnimalId.Equals(newAnimal.AnimalId);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.AnimalId.GetHashCode();
+        }
     }
 }
