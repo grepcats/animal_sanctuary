@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AnimalSanctuary.Models.Repositories
 {
-    interface IAnimalRepository
+    public interface IAnimalRepository
     {
         IQueryable<Animal> Animals { get; }
         Animal Save(Animal animal);
