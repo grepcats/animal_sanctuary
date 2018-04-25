@@ -69,5 +69,43 @@ namespace AnimalSanctuaryTests.ControllerTests
             //assert
             CollectionAssert.Contains(collection, testAnimal);
         }
+
+        [TestMethod]
+        public void Mock_PostViewResultCreate_ViewResult()
+        {
+            //Arrange
+            Animal testAnimal = new Animal
+            {
+                AnimalId = 1,
+                Species = "Feline"
+            };
+            DbSetup();
+            AnimalController controller = new AnimalController(mock.Object);
+
+            //Act
+            var resultView = controller.Create(testAnimal);
+            Console.WriteLine(resultView.GetType());
+            var type = resultView.GetType();
+            //Assert
+            Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
+        }
+
+        [TestMethod]
+        public void Mock_GetDetails_ReturnsView()
+        {
+            // Arrange
+            Animal testAnimal = new Animal();
+            testAnimal.Species = "Feline";
+            testAnimal.AnimalId = 1;
+            DbSetup();
+            AnimalController controller = new AnimalController(mock.Object);
+
+            //Act
+            var resultView = controller.Details(testAnimal.AnimalId) as ViewResult;
+            var model = resultView.ViewData.Model as Animal;
+
+            //Assert
+            Assert.IsInstanceOfType(resultView, typeof(ViewResult));
+        }
     }
 }
