@@ -16,4 +16,10 @@
     <ProjectReference Include="..\AnimalSanctuary\AnimalSanctuary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="ControllerTests\VetControllerTest.cs">
+      <ExcludedFromBuild>false</ExcludedFromBuild>
+    </Compile>
+  </ItemGroup>
+
 </Project>
