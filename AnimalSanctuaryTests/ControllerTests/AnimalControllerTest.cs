@@ -14,6 +14,7 @@ namespace AnimalSanctuaryTests.ControllerTests
     [TestClass]
     public class AnimalControllerTest
     {
+        EFAnimalRepository db = new EFAnimalRepository(new TestDbContext());
         Mock<IAnimalRepository> mock = new Mock<IAnimalRepository>();
         private void DbSetup()
         {
@@ -107,5 +108,23 @@ namespace AnimalSanctuaryTests.ControllerTests
             //Assert
             Assert.IsInstanceOfType(resultView, typeof(ViewResult));
         }
+
+        [TestMethod]
+        public void DB_CreatesNewEntries_Collection()
+        {
+            //arrange
+            AnimalController controller = new AnimalController(db);
+            Animal testAnimal = new Animal();
+            testAnimal.Species = "Bat";
+
+            //act
+            controller.Create(testAnimal);
+            var collection = (controller.Index() as ViewResult).ViewData.Model as List<Animal>;
+
+            //assert
+            CollectionAssert.Contains(collection, testAnimal);
+        }
+
+
     }
 }
