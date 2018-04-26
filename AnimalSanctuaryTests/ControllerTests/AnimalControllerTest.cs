@@ -12,8 +12,9 @@ using System.Linq;
 namespace AnimalSanctuaryTests.ControllerTests
 {
     [TestClass]
-    public class AnimalControllerTest
+    public class AnimalControllerTest : IDisposable
     {
+    
         EFAnimalRepository db = new EFAnimalRepository(new TestDbContext());
         Mock<IAnimalRepository> mock = new Mock<IAnimalRepository>();
         private void DbSetup()
@@ -23,6 +24,11 @@ namespace AnimalSanctuaryTests.ControllerTests
                 new Animal {AnimalId = 1, Species = "Feline", Sex = "Male", HabitatType = "desert", MedicalEmergency = false },
                 new Animal {AnimalId = 2, Species = "Canine", Sex = "Female", HabitatType = "living room", MedicalEmergency = true }
             }.AsQueryable());
+        }
+
+        public void Dispose()
+        {
+            db.DeleteAll();
         }
 
         [TestMethod]

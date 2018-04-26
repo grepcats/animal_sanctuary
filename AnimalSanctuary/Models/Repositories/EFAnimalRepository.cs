@@ -41,5 +41,10 @@ namespace AnimalSanctuary.Models.Repositories
             db.Animals.Remove(animal);
             db.SaveChanges();
         }
+
+        public void DeleteAll()
+        {
+            db.Database.ExecuteSqlCommand("DELETE FROM Animals;");
+        }
     }
 }
